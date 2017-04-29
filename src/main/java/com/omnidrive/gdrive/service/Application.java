@@ -37,10 +37,10 @@ import java.util.List;
 
 public class Application {
 
-	/** Application name. */
+	
 	private static final String APPLICATION_NAME = "OmniDrive";
 
-	/** Directory to store user credentials for this application. */
+	
 	private static final java.io.File DATA_STORE_DIR = new java.io.File(System.getProperty("user.home"),
 			".credentials/drive-java-quickstart");
 

@@ -18,4 +18,4 @@ OmniDrive is amalgamation of multiple file sharing services, to maximize thrughp
   
   
   Developers+Contributors
-  1.heminpanchal11@gmail.com
+  heminpanchal11@gmail.com
