@@ -40,6 +40,9 @@ public class Crud {
 		}
 	}
 
+	// A Static DriveService that is being reused throughout Application.
+	static Drive driveservice = null;
+
 	public static Credential authorize() throws IOException {
 		// Load client secrets.
 		InputStream in = Crud.class.getResourceAsStream("/client_secret.json");
@@ -55,14 +58,36 @@ public class Crud {
 
 	public static Drive getDriveService() throws IOException {
 		Credential credential = authorize();
-		return new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
+		if (driveservice == null) {
+			// Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY,
+			// credential).setApplicationName(APPLICATION_NAME).build();
+
+			driveservice = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+					.setApplicationName(APPLICATION_NAME).build();
+		}
+		return driveservice;
 	}
 
-	public static List<File> fetchFiles(int limit) throws IOException {
-		// limit integer will limit number of files, instead of fetching all of them.
-		FileList result = getDriveService().files().list().setMaxResults(limit).execute();
+	public static List<File> listGdriveObjests(int limit) throws IOException {
+		// limit integer will limit number of files, instead of fetching all of
+		// them.
+		getDriveService();
+
+		FileList result = driveservice.files().list().setMaxResults(limit).execute();
 		List<File> files = result.getItems();
 		return files;
 	}
+
+	public static String createGdriveFolder(String folderName) throws IOException {
+		// this method creates new folder in GDrive and return its id
+		File fileMetadata = new File();
+		fileMetadata.setTitle(folderName);
+		fileMetadata.setMimeType("application/vnd.google-apps.folder");
+		File file = driveservice.files().insert(fileMetadata).setFields("id").execute();
+		// System.out.println("Folder ID: " + file.getId());
+		return file.getId();
+	}
+	
+
 
 }
