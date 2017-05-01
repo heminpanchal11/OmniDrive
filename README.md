@@ -1,7 +1,7 @@
 # OmniDrive(java)
 Integration of major cloud file sharing services.
 
-OmniDrive is amalgamation of multiple file sharing services, to maximize thrughput & avaibility.
+OmniDrive is amalgamation of multiple file sharing services, to maximize throughput & avaibility.
 # Features
   Google Drive
   -Authorize Drive(Offline Access).
